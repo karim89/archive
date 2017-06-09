@@ -23,12 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // if(\Auth::user()->authorizeRoles(['Guest'])) {
-        //     dd('aa');
-        // } else {
-        //     dd('bb');
-        // }
-
         return view('home');
+    }
+
+    public function origin()
+    {
+        return view('origin');
     }
 }

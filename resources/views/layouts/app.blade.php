@@ -53,11 +53,10 @@
                             <li><a href="#"><span class="nav-icon-hexa">LU</span> Lookup </a></li>
 
                             <li>
-                                <a href="#"><span class="nav-icon-hexa">Um</span> User Manager </a>
+                                <a href="#"><span class="nav-icon-hexa">AM</span> Admin Manager </a>
                                 <ul>                                
-                                    <li><a href="#"><span class="nav-icon-hexa">Ul</span> User Listing </a></li>
-                                    <li><a href="#"><span class="nav-icon-hexa">Rl</span> Role Listing </a></li>
-                                    <li><a href="#"><span class="nav-icon-hexa">Pl</span> Permission Listing </a></li>
+                                    <li><a href="#"><span class="nav-icon-hexa">Aa</span> Add Admin </a></li>
+                                    <li><a href="#"><span class="nav-icon-hexa">Ul</span> Admin Listing </a></li>                 
                                 </ul>
                             </li> 
                         </ul>
@@ -73,8 +72,8 @@
                             <li class="visible-mobile"><a href="#" class="btn btn-link btn-icon" data-sidebar-toggle=".app-sidebar.dir-left"><span class="icon-menu"></span></a></li>
                             <li class="hidden-mobile"><a href="#" class="btn btn-link btn-icon" data-sidebar-minimize=".app-sidebar.dir-left"><span class="icon-menu"></span></a></li>
                         </ul>
-                        <form class="app-header-search" action="" method="post">        
-                            <input type="text" name="keyword" placeholder="Search">
+                        <form class="app-header-search" action="" method="get">        
+                            <input type="text" name="url" placeholder="Search" value="{{isset($_GET['url']) ? $_GET['url'] : ''}}">
                         </form>    
                     
                         <ul class="app-header-buttons pull-right">
@@ -94,16 +93,16 @@
                                                 <li><a href="#"><span class="icon-users"></span> Contacts <span class="label label-default pull-right">76</span></a></li>
                                                 <li class="divider"></li>
                                                 <li>
-                                            <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                                    <a href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault();
+                                                                 document.getElementById('logout-form').submit();">
+                                                        Logout
+                                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                        </a></li> 
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                        {{ csrf_field() }}
+                                                    </form>
+                                                </li> 
                                             </ul>
                                         </div>                    
                                     </div>
@@ -130,8 +129,11 @@
                         -->
                     </div>
                     @yield('content')
-                        
-                    </div>
+                    
+                    <!-- END PAGE HEADING -->
+                    
+                    <!-- START PAGE CONTAINER -->
+                    
                     <!-- END PAGE CONTAINER -->
                     
                 </div>
@@ -380,6 +382,25 @@
             <div class="app-overlay"></div>
             <!-- END APP OVERLAY -->
         </div>        
+        <!-- END APP WRAPPER -->                
+        
+        <!--
+        <div class="modal fade" id="modal-thanks" tabindex="-1" role="dialog">                        
+            <div class="modal-dialog modal-sm" role="document">                    
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-cross"></span></button>
+                <div class="modal-content">                    
+                    <div class="modal-body">                
+                        <p class="text-center margin-bottom-20">
+                            <img src="assets/images/smile.png" alt="Thank you" style="width: 100px;">
+                        </p>                
+                        <h3 id="modal-thanks-heading" class="text-uppercase text-bold text-lg heading-line-below heading-line-below-short text-center"></h3>
+                        <p class="text-muted text-center margin-bottom-10">Thank you so much for likes</p>
+                        <p class="text-muted text-center">We will do our best to make<br> Boooya template perfect</p>                
+                        <p class="text-center"><button class="btn btn-success btn-clean" data-dismiss="modal">Continue</button></p>
+                    </div>                    
+                </div>
+            </div>            
+        </div>-->     
         <!-- END APP WRAPPER -->                
         
        
