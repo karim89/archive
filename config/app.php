@@ -186,7 +186,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-        
+        Spatie\Browsershot\BrowsershotServiceProvider::class,
 
     ],
 

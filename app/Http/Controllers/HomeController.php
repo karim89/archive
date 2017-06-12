@@ -30,4 +30,28 @@ class HomeController extends Controller
     {
         return view('origin');
     }
+
+    public function websiteAdd()
+    {
+        return view('website-add');
+    }
+
+    public function prtsc()
+    {
+        $url = str_replace('http://', '', $_GET['url']);
+        $url = str_replace('https://', '', $url);
+        $url = str_replace('www.', '', $url);
+        $name_file = str_replace('.', '-', $url);
+        $name_file = str_replace('/', '_', $name_file);
+        $url='http://'.$url;
+        $browsershot = new \Spatie\Browsershot\Browsershot();
+        $browsershot
+        ->setURL($url)
+        ->setWidth(1350)
+        ->setHeight(0)
+        ->setQuality(100)
+        ->setTimeout(5000)
+        ->save('img/'.$name_file.'.jpeg');
+        echo "<img src= '".\URL::to('img/'.$name_file.'.jpeg')."' width='100%'> ";
+    }
 }

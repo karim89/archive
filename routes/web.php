@@ -20,3 +20,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/origin', 'HomeController@origin')->name('origin');
+Route::get('/prtsc', 'HomeController@prtsc')->name('prtsc');
+Route::get('/website/add', 'HomeController@websiteAdd')->name('websiteAdd');

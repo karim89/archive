@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>                        
-        <title>Boooya - Revolution Admin Template</title>            
+        <title>MWARC</title>            
         
         <!-- META SECTION -->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -32,21 +32,21 @@
                     <nav>
                         <ul>
                             <li class="title">MAIN</li>
-                            <li><a href="MWARC-dashboard.html"><span class="nav-icon-hexa">DB</span> Dashboard</a></li>      
+                            <li><a href="{{ URL::to('/home')}}"><span class="nav-icon-hexa">DB</span> Dashboard</a></li>      
                             
                             <li>
                                 <a href="#"><span class="nav-icon-hexa">HR</span> Harvest </a>
                                 <ul>                                
-                                    <li><a href="MWARC-harvest-website.html"><span class="nav-icon-hexa">Hw</span> Harvest URL / Domain / Website </a></li>
-                                    <li><a href="MWARC-harvest-website-listing.html"><span class="nav-icon-hexa">Hl</span> Harvest Listing </a></li>                 
+                                    <li><a href="{{ URL::to('/harvest/add')}}"><span class="nav-icon-hexa">Hw</span> Harvest URL / Domain / Website </a></li>
+                                    <li><a href="{{ URL::to('/harvest')}}"><span class="nav-icon-hexa">Hl</span> Harvest Listing </a></li>                 
                                 </ul>
                             </li>        
 
                             <li>
                                 <a href="MWARC-website-listing.html"><span class="nav-icon-hexa">WL</span> Website / URL / Domain </a>
                                 <ul>                                
-                                    <li><a href="MWARC-website-add.html"><span class="nav-icon-hexa">Aa</span> Add Website / URL / Domain </a></li>
-                                    <li><a href="MWARC-website-listing.html"><span class="nav-icon-hexa">Ul</span> Website Listing </a></li>                 
+                                    <li><a href="{{ URL::to('/website/add')}}"><span class="nav-icon-hexa">Aa</span> Add Website / URL / Domain </a></li>
+                                    <li><a href="{{ URL::to('/website/add')}}"><span class="nav-icon-hexa">Ul</span> Website Listing </a></li>                 
                                 </ul>
                             </li>
 
@@ -136,90 +136,92 @@
                     
                     <!-- END PAGE CONTAINER -->
                     
-                </div>
+                
                 <!-- END APP CONTENT -->
                                 
-            </div>
+           
             <!-- END APP CONTAINER -->
                         
-            <!-- START APP FOOTER -->
-            <div class="app-footer app-footer-default" id="footer">
-                <!--
-                <div class="alert alert-danger alert-dismissible alert-inside text-center">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="icon-cross"></span></button>
-                    We use cookies to offer you the best experience on our website. Continuing browsing, you accept our cookies policy.
-                </div>
-                -->
-                <div class="app-footer-line extended">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                            <h3 class="title"><img src="./img/logo.png" alt="boooyah"> </h3>                            
-                            <p> <b>Malaysia Web Archiving</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum bibendum at leo id scelerisque. Phasellus lectus metus, ornare eu elit quis, rutrum posuere odio.</p>
-                            <p><strong>How?</strong><br>Aenean id eros non augue pellentesque ultrices ut id magna. Donec feugiat mi elit, sed pharetra quam condimentum at. Sed ullamcorper blandit nisi.</p>
-                        </div>
-                        <div class="col-md-2 col-sm-4">
-                            <h3 class="title"><span class="icon-clipboard-text"></span> About Us</h3>
-                            <ul class="list-unstyled">
-                                <li><a href="#">Lorem ipsum</a></li>                                                                
-                                <li><a href="#">Consectetur adipiscing</a></li>
-                                <li><a href="#">Vestibulum bibendum </a></li>
-                                <li><a href="#">Phasellus lectus metus</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-2 col-sm-4">                            
-                            <h3 class="title"><span class="icon-lifebuoy"></span> Need Help?</h3>
-                            <ul class="list-unstyled">
-                                <li><a href="#">Ornare eu elit quis</a></li>                                                                
-                                <li><a href="#">Rutrum posuere odio</a></li>
-                                <li><a href="#">Caenean id eros</a></li>
-                                <li><a href="#">Donec feugiat mi elit</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3 col-sm-6 clear-mobile">
-                            <h3 class="title"><span class="icon-reading"></span> Latest News</h3>
-            
-                            <div class="row app-footer-articles">
-                                <div class="col-md-9 col-sm-12">
-                                    <a href="#">Lorem ipsum dolor sit amet</a>
-                                    <p>Quod quam magnum sit fictae veterum fabulae declarant, in quibus tam multis.</p>
-                                </div>
+                    <!-- START APP FOOTER -->
+                        <div class="app-footer app-footer-default" id="footer">
+                            
+                            <!-- <div class="alert alert-danger alert-dismissible alert-inside text-center">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="icon-cross"></span></button>
+                                We use cookies to offer you the best experience on our website. Continuing browsing, you accept our cookies policy.
+                            </div> -->
+                            
+                            <div class="app-footer-line extended">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4">
+                                        <h3 class="title"><img src="{{ URL::to('/img/logo.png')}}" alt="boooyah"> </h3>                            
+                                        <p> <b>Malaysia Web Archiving</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum bibendum at leo id scelerisque. Phasellus lectus metus, ornare eu elit quis, rutrum posuere odio.</p>
+                                        <p><strong>How?</strong><br>Aenean id eros non augue pellentesque ultrices ut id magna. Donec feugiat mi elit, sed pharetra quam condimentum at. Sed ullamcorper blandit nisi.</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4">
+                                        <h3 class="title"><span class="icon-clipboard-text"></span> About Us</h3>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#">Lorem ipsum</a></li>                                                                
+                                            <li><a href="#">Consectetur adipiscing</a></li>
+                                            <li><a href="#">Vestibulum bibendum </a></li>
+                                            <li><a href="#">Phasellus lectus metus</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4">                            
+                                        <h3 class="title"><span class="icon-lifebuoy"></span> Need Help?</h3>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#">Ornare eu elit quis</a></li>                                                                
+                                            <li><a href="#">Rutrum posuere odio</a></li>
+                                            <li><a href="#">Caenean id eros</a></li>
+                                            <li><a href="#">Donec feugiat mi elit</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 clear-mobile">
+                                        <h3 class="title"><span class="icon-reading"></span> Latest News</h3>
+                        
+                                        <div class="row app-footer-articles">
+                                            <div class="col-md-9 col-sm-12">
+                                                <a href="#">Lorem ipsum dolor sit amet</a>
+                                                <p>Quod quam magnum sit fictae veterum fabulae declarant, in quibus tam multis.</p>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="row app-footer-articles">
+                                            <div class="col-md-9 col-sm-12">
+                                                <a href="#">Consectetur adipiscing elit.</a>
+                                                <p>In quibus tam multis tamque variis ab ultima antiquitate repetitis tria.</p>
+                                            </div>
+                                        </div>
+                        
+                                    </div>
+                                    <div class="col-md-2 col-sm-6">
+                                        <h3 class="title"><span class="icon-thumbs-up"></span> Social Media</h3>
+                        
+                                        <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                        <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                        <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
+                                            <i class="fa fa-youtube"></i>
+                                        </a>
+                                        <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                        <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
+                                            <i class="fa fa-feed"></i>
+                                        </a>
+                        
+                                    </div>                        
+                                </div>                    
                             </div>
-            
-                            <div class="row app-footer-articles">
-                                <div class="col-md-9 col-sm-12">
-                                    <a href="#">Consectetur adipiscing elit.</a>
-                                    <p>In quibus tam multis tamque variis ab ultima antiquitate repetitis tria.</p>
-                                </div>
+                            <div class="app-footer-line darken">                
+                                <div class="copyright wide text-center">&copy; 2016 Arkib Negara Malaysia. All right reserved.</div>                
                             </div>
-            
                         </div>
-                        <div class="col-md-2 col-sm-6">
-                            <h3 class="title"><span class="icon-thumbs-up"></span> Social Media</h3>
-            
-                            <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                            <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                            <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
-                                <i class="fa fa-youtube"></i>
-                            </a>
-                            <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                            <a href="#" class="label-icon label-icon-footer label-icon-bordered label-icon-rounded label-icon-lg">
-                                <i class="fa fa-feed"></i>
-                            </a>
-            
-                        </div>                        
-                    </div>                    
-                </div>
-                <div class="app-footer-line darken">                
-                    <div class="copyright wide text-center">&copy; 2016 Arkib Negara Malaysia. All right reserved.</div>                
+                    <!-- END APP FOOTER -->
                 </div>
             </div>
-            <!-- END APP FOOTER -->
             <!-- START APP SIDEPANEL -->
             <div class="app-sidepanel scroll" data-overlay="show">                
                 <div class="container">
@@ -407,7 +409,7 @@
         
         <!-- IMPORTANT SCRIPTS -->
         <script type="text/javascript" src="{{ URL::to('/js/vendor/jquery/jquery.min.js')}}"></script>
-        <script type="text/javascript" src="{{ URL::to('/js/vendor/jquery/jquery-migrate.min.js')}}"></script>
+        <script type="text/javascript" src="{{ URL::to('/js/vendor/jquery/jquery-migrate-1.4.1.min.js')}}"></script>
         <script type="text/javascript" src="{{ URL::to('/js/vendor/jquery/jquery-ui.min.js')}}"></script>
         <script type="text/javascript" src="{{ URL::to('/js/vendor/bootstrap/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{ URL::to('/js/vendor/moment/moment.min.js')}}"></script>
