@@ -42,7 +42,7 @@ class HomeController extends Controller
         $url = str_replace('https://', '', $url);
         $url = str_replace('www.', '', $url);
         $name_file = str_replace('.', '-', $url);
-        $name_file = str_replace('/', '_', $name_file);
+        $name_file = 'web/'.str_replace('/', '_', $name_file).'.html';
         $url='http://'.$url;
         $browsershot = new \Spatie\Browsershot\Browsershot();
         $browsershot

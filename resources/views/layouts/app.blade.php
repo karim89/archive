@@ -24,14 +24,12 @@
             <div class="app-container">
                 <!-- START SIDEBAR -->
                 <div class="app-sidebar app-navigation app-navigation-fixed scroll app-navigation-style-default app-navigation-open-hover dir-left" data-type="close-other">
-                    <a href="index.html" class="app-navigation-logo">
+                    <a href="{{ URL::to('/home')}}" class="app-navigation-logo">
                         MWARC - Administrator Panel
-                        <button class="app-navigation-logo-button mobile-hidden" data-sidepanel-toggle=".app-sidepanel"><span class="icon-alarm"></span> <span class="app-navigation-logo-button-alert">7</span></button>
                     </a>
                     
                     <nav>
                         <ul>
-                            <li class="title">MAIN</li>
                             <li><a href="{{ URL::to('/home')}}"><span class="nav-icon-hexa">DB</span> Dashboard</a></li>      
                             
                             <li>
@@ -46,19 +44,21 @@
                                 <a href="MWARC-website-listing.html"><span class="nav-icon-hexa">WL</span> Website / URL / Domain </a>
                                 <ul>                                
                                     <li><a href="{{ URL::to('/website/add')}}"><span class="nav-icon-hexa">Aa</span> Add Website / URL / Domain </a></li>
-                                    <li><a href="{{ URL::to('/website/add')}}"><span class="nav-icon-hexa">Ul</span> Website Listing </a></li>                 
+                                    <li><a href="{{ URL::to('/website')}}"><span class="nav-icon-hexa">Ul</span> Website Listing </a></li>                 
                                 </ul>
                             </li>
 
                             <li><a href="#"><span class="nav-icon-hexa">LU</span> Lookup </a></li>
-
-                            <li>
-                                <a href="#"><span class="nav-icon-hexa">AM</span> Admin Manager </a>
-                                <ul>                                
-                                    <li><a href="#"><span class="nav-icon-hexa">Aa</span> Add Admin </a></li>
-                                    <li><a href="#"><span class="nav-icon-hexa">Ul</span> Admin Listing </a></li>                 
-                                </ul>
-                            </li> 
+                            @role('admin')
+                                <li >
+                                    <a href="#"><span class="nav-icon-hexa">UM</span> User Manager </a>
+                                    <ul>                                
+                                        <li><a href="{{ URL::to('/user')}}"><span class="nav-icon-hexa">Ul</span> User Listing </a></li> 
+                                        <li><a href="{{ URL::to('/role')}}"><span class="nav-icon-hexa">Rl</span> Role Listing </a></li> 
+                                        <li><a href="{{ URL::to('/permission')}}"><span class="nav-icon-hexa">Pl</span> Permission Listing </a></li>                 
+                                    </ul>
+                                </li> 
+                            @endrole
                         </ul>
                     </nav>
                 </div>
@@ -79,10 +79,14 @@
                         <ul class="app-header-buttons pull-right">
                             <li>
                                 <div class="contact contact-rounded contact-bordered contact-lg contact-ps-controls">
-                                    <img src="assets/images/users/user_1.jpg" alt="John Doe">
+                                    <!-- <img src="assets/images/users/user_1.jpg" alt="John Doe"> -->
                                     <div class="contact-container">
                                         <a href="#">{{ Auth::user()->name }}</a>
-                                        <span>Administrator</span>
+                                        <span>
+                                            @foreach( Auth::user()->role as $rol )
+                                                {{$rol->role['display_name']}}
+                                            @endforeach
+                                        </span>
                                     </div>
                                     <div class="contact-controls">
                                         <div class="dropdown">
@@ -113,21 +117,19 @@
                     <!-- END APP HEADER  -->
                     
                     <!-- START PAGE HEADING -->
-                    <div class="app-heading app-heading-bordered app-heading-page">
-                        <div class="icon icon-lg">
-                            <span class="icon-laptop-phone"></span>
+                    @if (Session::has('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Success,</strong> {{ Session::get('success') }}
                         </div>
-                        <div class="title">
-                            <h1>Malaysia Web Archiving</h1>
-                            <p>Welcome to Malaysia Web Archiving (MWARC) Dashboard</p>
-                        </div>               
-                        <!--
-                        <div class="heading-elements">
-                            <a href="#" class="btn btn-danger" id="page-like"><span class="app-spinner loading"></span> loading...</a>
-                            <a href="https://themeforest.net/item/boooya-revolution-admin-template/17227946?ref=aqvatarius&license=regular&open_purchase_for_item_id=17227946" class="btn btn-success btn-icon-fixed"><span class="icon-text">$24</span> Purchase</a>
+                    @endif
+                    @if (Session::has('danger'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Sorry!,</strong> {{ Session::get('danger') }}
                         </div>
-                        -->
-                    </div>
+                    @endif
+                    
                     @yield('content')
                     
                     <!-- END PAGE HEADING -->
@@ -223,7 +225,7 @@
                 </div>
             </div>
             <!-- START APP SIDEPANEL -->
-            <div class="app-sidepanel scroll" data-overlay="show">                
+            <!-- <div class="app-sidepanel scroll" data-overlay="show">                
                 <div class="container">
                     
                     <div class="app-heading app-heading-condensed app-heading-small padding-left-0">
@@ -377,7 +379,7 @@
                     </div>
                     
                 </div>
-            </div>
+            </div> -->
             <!-- END APP SIDEPANEL -->
             
             <!-- APP OVERLAY -->
@@ -403,9 +405,24 @@
                 </div>
             </div>            
         </div>-->     
-        <!-- END APP WRAPPER -->                
-        
-       
+        <!-- END APP WRAPPER --> 
+        <!-- MODAL -->
+        <div class="modal fade" id="myModal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div id="modal-lg-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div id="modal-content"></div>
+                </div>
+            </div>
+        </div>
+        <!-- END MODAL -->
         
         <!-- IMPORTANT SCRIPTS -->
         <script type="text/javascript" src="{{ URL::to('/js/vendor/jquery/jquery.min.js')}}"></script>
@@ -431,5 +448,31 @@
         <script type="text/javascript" src="{{ URL::to('/js/app_demo.js')}}"></script>
         <!-- END APP SCRIPTS -->
         <script type="text/javascript" src="{{ URL::to('/js/app_demo_dashboard.js')}}"></script>
+        <script>
+            function dataModalLg(url)
+            {   
+                $("#modal-lg-content").html( "" );
+                $.ajax({
+                     type: "GET",
+                     url: url,
+                     cache: false,
+                     success: function(html) {
+                     $("#modal-lg-content").html( html );
+                     }
+                });
+            }
+            function dataModal(url)
+            {   
+                $("#modal-content").html( "" );
+                $.ajax({
+                     type: "GET",
+                     url: url,
+                     cache: false,
+                     success: function(html) {
+                     $("#modal-content").html( html );
+                     }
+                });
+            }
+        </script>
     </body>
 </html>
