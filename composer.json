@@ -9,6 +9,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
+        "mixnode/mixnode-warcreader-php": "^0.0.6",
         "spatie/browsershot": "^1.9"
     },
     "require-dev": {

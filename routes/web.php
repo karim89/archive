@@ -23,7 +23,18 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/origin', 'HomeController@origin');
 Route::get('/prtsc', 'HomeController@prtsc');
+Route::get('/show-archive', 'HomeController@readWarc');
 Route::get('/website/add', ['middleware' => ['permission:add-web', 'role:admin'], 'uses' => 'HomeController@websiteAdd']);
+
+// Archive
+Route::group(['prefix' => 'archive', 'middleware' => ['role:admin']], function() {
+	Route::get('/proccess', 'ArchiveController@proccess');
+	Route::get('/list-proccess', 'ArchiveController@listProccess');
+	Route::get('/pause/{id}', 'ArchiveController@pause');
+	Route::get('/resume/{id}', 'ArchiveController@resume');
+	
+});
+
 // Permission
 Route::group(['prefix' => 'permission', 'middleware' => ['role:admin']], function() {
 	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'PermissionController@index']);
