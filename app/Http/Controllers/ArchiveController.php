@@ -27,7 +27,7 @@ class ArchiveController extends Controller
         $archive->pause_time = date("Y-m-d H:i:s");
         $archive->done_time = null;
         $archive->save();
-    	return redirect('/archive/proccess')->with('success','Proccess archiving'.$archive->url.' pause.');
+    	return redirect('/archive/proccess')->with('success','Proccess archiving '.$archive->url.' pause.');
     }
 
     public function resume($id)
@@ -36,6 +36,6 @@ class ArchiveController extends Controller
     	$archive->pause_time = null;
     	$archive->resume_time = date("Y-m-d H:i:s");
     	$archive->save();
-    	return redirect('/archive/proccess')->with('success','Proccess archiving'.$archive->url.' resume.');
+    	return redirect('/archive/proccess')->with('success','Proccess archiving '.$archive->url.' resume.');
     }
 }
