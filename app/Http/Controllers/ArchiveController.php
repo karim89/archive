@@ -12,10 +12,25 @@ class ArchiveController extends Controller
         return view('archive.proccess');
     }
 
-    public function listProccess()
+    public function listProccess(Request $request)
     {
-        $archive = Archive::get()->toJson();
-        echo $archive;
+        return Archive::get()->toJson();
+    }
+
+    public function readWarc($created_at, $url)
+    {
+        $created_at = date('Y-m-d H:i:s', strtotime($created_at));
+        $archive = Archive::where('url', $url)->where('created_at', $created_at)->first();
+        $warc = 'archive/'.date_format($archive->created_at,"YmdHis").'/'.str_replace(' ', '', $archive->name).'.warc.gz';
+                
+        $warc_reader = new \Mixnode\WarcReader($warc);
+        
+        while(($record = $warc_reader->nextRecord()) != FALSE){
+            // dd($record);
+            // print_r($record['header']);
+            echo($record['content']);
+        }
+        
     }
 
     public function pause($id)

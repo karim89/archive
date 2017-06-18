@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Archive;
 
 class HomeController extends Controller
 {
@@ -53,15 +54,5 @@ class HomeController extends Controller
         ->save('img/'.$name_file.'.jpeg');
         echo "<img src= '".\URL::to('img/'.$name_file.'.jpeg')."' width='100%'> ";
     }
-
-    public function readWarc()
-    {
-        $warc_reader = new \Mixnode\WarcReader("archive/detik.warc.gz");
-
-        while(($record = $warc_reader->nextRecord()) != FALSE){
-            print_r($record['header']);
-            print_r($record['content']);
-        }
-        
-    }
+    
 }

@@ -18,58 +18,69 @@
             </tbody>
         </table>
         <div id='message'></div>
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-        <script>
-            $(function() {
-                setTimeout(function(){
-                    getItem();
-                    return false;
-                },10);
-                setInterval( function () {
-                    getItem();
-                }, 90000 );
-                function getItem()
-                {
-                    $.getJSON("{{ URL::to('archive/list-proccess')}}", function (data) {
-                        var tr;
-                        var i = 0;
-                        $('#item').html('');
-                        $.each(data, function(idx, elem){
-                            i++;
-                            var status;
-                            var action = '';
-                            if(elem.done_time == null){
-                                if(elem.run_time == null){
-                                    status = 'Waiting';
-                                }else if(elem.run_time != null && elem.pause_time == null && elem.resume_time != null){
-                                        status = 'Waiting';
-                                }else if(elem.run_time != null && elem.pause_time == null && elem.resume_time == null){
-                                    status = 'Proccess Archiving';
-                                    action = "<a href='{{URL::to('/')}}/archive/pause/"+elem.id+"' class='btn btn-default btn-sm'>Paus</a>";
-                                }else if(elem.run_time != null && elem.pause_time != null){
-                                    status = 'Pause';
-                                    action = "<a href='{{URL::to('/')}}/archive/resume/"+elem.id+"' class='btn btn-default btn-sm'>Resume</a>";
-                                }
-                            }else{
-                                status = 'Finish';
-                            }
-                            tr = $('<tr/>');
-                            tr.append("<td>" + i + "</td>");
-                            tr.append("<td>" + elem.name + "</td>");
-                            tr.append("<td>" + elem.url + "</td>");
-                            tr.append("<td>" + status + "</td>");
-                            tr.append("<td>" + action + "</td>");
-                            $('#archive').append(tr);
-                            $('#message').html('');
-                        });
-                        if(i == 0){
-                            $('#message').html('<center><b> Data Not Nound.</b></center>');
-                        }
-                    });
-                }
-            });
-        </script>
+        
         
     </div>
 </div>  
 @endsection
+@push('scripts')
+
+<script>
+    $(function() {
+        setTimeout(function(){
+            getItem();
+            return false;
+        },10);
+        setInterval( function () {
+            getItem();
+        }, 5000 );
+        function getItem()
+        {
+            $.getJSON("{{ URL::to('archive/list-proccess')}}", function (data) {
+                var tr;
+                var i = 0;
+                $('#item').html('');
+                $.each(data, function(idx, elem){
+                    i++;
+                    var status;
+                    var action = '';
+                    var url = elem.url;
+                    if(elem.done_time == null){
+                        if(elem.run_time == null){
+                            status = 'Waiting';
+                        }else if(elem.run_time != null && elem.pause_time == null && elem.resume_time != null){
+                                status = 'Waiting';
+                        }else if(elem.run_time != null && elem.pause_time == null && elem.resume_time == null){
+                            status = 'Proccess Archiving';
+                            action = "<a href='{{URL::to('/')}}/archive/pause/"+elem.id+"' class='btn btn-default btn-sm'>Paus</a>";
+                        }else if(elem.run_time != null && elem.pause_time != null){
+                            status = 'Pause';
+                            action = "<a href='{{URL::to('/')}}/archive/resume/"+elem.id+"' class='btn btn-default btn-sm'>Resume</a>";
+                        }
+                    }else{
+                        var created_at = elem.created_at;
+                        created_at = created_at.replace('-', '');
+                        created_at = created_at.replace('-', '');
+                        created_at = created_at.replace(':', '');
+                        created_at = created_at.replace(':', '');
+                        created_at = created_at.replace(' ', '');
+                        url = "<a href='{{URL::to('/')}}/archive/read/"+created_at+"/"+elem.url+"' >"+elem.url+"</a>";
+                        status = 'Finish';
+                    }
+                    tr = $('<tr/>');
+                    tr.append("<td>" + i + "</td>");
+                    tr.append("<td>" + elem.name + "</td>");
+                    tr.append("<td>" + url + "</td>");
+                    tr.append("<td>" + status + "</td>");
+                    tr.append("<td>" + action + "</td>");
+                    $('#archive').append(tr);
+                    $('#message').html('');
+                });
+                if(i == 0){
+                    $('#message').html('<center><b> Data Not Nound.</b></center>');
+                }
+            });
+        }
+    });
+</script>
+@endpush()

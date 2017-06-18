@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
 
             foreach ($archives as $value) {
                 $dir = 'public/archive/'.date_format($value->created_at,"YmdHis");
+                $file_name = str_replace(' ', '', $value->name);
                 if($value->run_time == null) {
                     
                     if (!file_exists('public/archive')) {
@@ -50,7 +51,7 @@ class Kernel extends ConsoleKernel
                     $archive->run_time = date("Y-m-d H:i:s");
                     $archive->save();
                     
-                    $cmd = "wget -mpckr -l 5 -H --user-agent= -e robots=off  --warc-file=".$dir."/".$value->name." --warc-cdx ".$value->url." --directory-prefix='".$dir."'";
+                    $cmd = "wget -mpckr -l 5  --user-agent= -e robots=off -o".$dir."/".$file_name.".log  --warc-file=".$dir."/".$file_name." --warc-cdx ".$value->url." --directory-prefix='".$dir."'";
                     shell_exec($cmd);
                     
                     $archive = Archive::find($value->id);
@@ -65,7 +66,7 @@ class Kernel extends ConsoleKernel
                     $archive->resume_time = null;
                     $archive->save();
 
-                    $cmd = "wget -mpckr -l 5 -H --user-agent= -e robots=off  --warc-file=".$dir."/".$value->name." --warc-cdx ".$value->url." --directory-prefix='".$dir."'";
+                    $cmd = "wget -c -mpckr -l 5  --user-agent= -e robots=off -o".$dir."/".$file_name.".log --warc-file=".$dir."/".$file_name." --warc-cdx ".$value->url." --directory-prefix='".$dir."'";
                     shell_exec($cmd);
                 
                     $archive = Archive::find($value->id);
