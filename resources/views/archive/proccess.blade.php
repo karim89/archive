@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
 <div class="panel panel-default">
     <div class="panel-heading"><h2>Proccess Archiving</h2></div>
     <div class="panel-body">
@@ -12,19 +11,15 @@
                 <th>Status</th>
                 <th width='5%'>Action</th>
             </thead>
-            
-                
             <tbody id='item'></div>
             </tbody>
         </table>
         <div id='message'></div>
-        
-        
     </div>
 </div>  
 @endsection
-@push('scripts')
 
+@push('scripts')
 <script>
     $(function() {
         setTimeout(function(){
@@ -65,6 +60,7 @@
                         created_at = created_at.replace(':', '');
                         created_at = created_at.replace(' ', '');
                         url = "<a href='{{URL::to('/')}}/archive/read/"+created_at+"/"+elem.url+"' >"+elem.url+"</a>";
+                        // url = "<a href='{{URL::to('/')}}/archive/web/"+created_at+"?url="+elem.url+"' >"+elem.url+"</a>";
                         status = 'Finish';
                     }
                     tr = $('<tr/>');

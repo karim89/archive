@@ -25,12 +25,43 @@ class ArchiveController extends Controller
                 
         $warc_reader = new \Mixnode\WarcReader($warc);
         
-        while(($record = $warc_reader->nextRecord()) != FALSE){
-            // dd($record);
-            // print_r($record['header']);
-            echo($record['content']);
+        while(($record = $warc_reader->nextRecord()) != FALSE) {
+            
+            print_r($record['header']);
+            print_r($record['content']);
+        
         }
         
+    }
+
+    public function web($created_at)
+    {
+        if(isset($_GET['url'])) {
+        
+            $url = $_GET['url'];
+            $url = str_replace('https://', '', $url);
+            $url = str_replace('http://', '', $url);
+            $path = 'archive/'.$created_at.'/'.$url;
+            
+            if (file_exists($path.'/index.html')) {
+
+                $path = realpath(dirname(__FILE__)).'/../../../public/archive/'.$created_at.'/'.$url.'/index.html';
+
+            } else {
+
+                $path = realpath(dirname(__FILE__)).'/../../../public/archive/'.$created_at.'/'.$url;
+
+            }
+
+            $content = file_get_contents($path);
+            $content = str_replace('<a href="http://', '<a href="'.\URL('/').'/archive/web/'.$created_at.'?url=', $content);
+            $content = str_replace('<a href="https://', '<a href="'.\URL('/').'/archive/web/'.$created_at.'?url=', $content);
+            $content = str_replace('href="'.\URL('/').'/archive/web/'.$created_at.'?url=index.html"', 'href=""', $content);
+            $content = str_replace('<link rel="stylesheet" href="/', '<link rel="stylesheet" href="'.\URL('/').'/archive/'.$created_at.'/'.$url.'/', $content);
+            $content = str_replace('type="text/javascript" src="/', 'type="text/javascript" src="'.\URL('/').'/archive/'.$created_at.'/'.$url.'/', $content);
+            echo($content);
+
+        }
     }
 
     public function pause($id)

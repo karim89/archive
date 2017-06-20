@@ -33,36 +33,41 @@
             </table>
             <div id='message'></div>
             <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-            <script>
-                $(function() {
-                    $('#message').html('<center><b>Loading........</b></center>');
-                    $.getJSON('http://web.archive.org/cdx/search/cdx?url={{$_GET['url']}}&output=json', function (data) {
-                        var tr;
-                        for (var i = 0; i < data.length; i++) {
-                            if( i > 0) {
-                                tr = $('<tr/>');
-                                var timestamp = data[i][1];
-                                var year = parseInt(timestamp.substr(0, 4), 10);
-                                var month = parseInt(timestamp.substr(4, 2), 10);
-                                var day = parseInt(timestamp.substr(6, 2), 10);
-                                var horse = parseInt(timestamp.substr(8, 2), 10);
-                                var menit = parseInt(timestamp.substr(10, 2), 10);
-                                var second = parseInt(timestamp.substr(12, 2), 10);
-                                var date = new Date(year, month - 1, day, horse, menit, second);
-                                tr.append("<td>" + i + "</td>");
-                                tr.append("<td> <a href='#'  data-toggle='modal' class='modal-origin' data-target='#myModal-lg'  onClick='dataModalLg(\"{{ URL::to('origin')}}?timestamp="+timestamp+"&origin="+data[i][2]+"\")'>"+date+"</a> </td>");
-                                tr.append("<td>" + data[i][2] + "</td>");
-                                $('#archive').append(tr);
-                                $('#message').html('');
-                            }
-                        }
-                        if(i == 0){
-                            $('#message').html('<center><b> Data Not Nound.</b></center>');
-                        }
-                    });
-                });
-            </script>
         @endif
     </div>
 </div>  
 @endsection
+
+@if(isset($_GET['url']))
+    @push('scripts')
+        <script>
+            $(function() {
+                $('#message').html('<center><b>Loading........</b></center>');
+                $.getJSON('http://web.archive.org/cdx/search/cdx?url={{$_GET['url']}}&output=json', function (data) {
+                    var tr;
+                    for (var i = 0; i < data.length; i++) {
+                        if( i > 0) {
+                            tr = $('<tr/>');
+                            var timestamp = data[i][1];
+                            var year = parseInt(timestamp.substr(0, 4), 10);
+                            var month = parseInt(timestamp.substr(4, 2), 10);
+                            var day = parseInt(timestamp.substr(6, 2), 10);
+                            var horse = parseInt(timestamp.substr(8, 2), 10);
+                            var menit = parseInt(timestamp.substr(10, 2), 10);
+                            var second = parseInt(timestamp.substr(12, 2), 10);
+                            var date = new Date(year, month - 1, day, horse, menit, second);
+                            tr.append("<td>" + i + "</td>");
+                            tr.append("<td> <a href='#'  data-toggle='modal' class='modal-origin' data-target='#myModal-lg'  onClick='dataModalLg(\"{{ URL::to('origin')}}?timestamp="+timestamp+"&origin="+data[i][2]+"\")'>"+date+"</a> </td>");
+                            tr.append("<td>" + data[i][2] + "</td>");
+                            $('#archive').append(tr);
+                            $('#message').html('');
+                        }
+                    }
+                    if(i == 0){
+                        $('#message').html('<center><b> Data Not Nound.</b></center>');
+                    }
+                });
+            });
+        </script>
+    @endpush
+@endif
