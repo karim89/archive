@@ -31,15 +31,11 @@ class Kernel extends ConsoleKernel
             $archives = Archive::where('done_time', null)->get();
 
             foreach ($archives as $value) {
-                $dir = 'public/archive/'.date_format($value->created_at,"YmdHis");
+                $part = '/mygwa/staging';
+                $dir = $part.'/'.date_format($value->created_at,"YmdHis");
                 $file_name = str_replace(' ', '', $value->name);
+                $file_name = str_replace('.', '-', $file_name);
                 if($value->run_time == null) {
-                    
-                    if (!file_exists('public/archive')) {
-                        
-                        mkdir('public/archive', 0777);
-                    
-                    }  
                     
                     if (!file_exists($dir)) {
                         

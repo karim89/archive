@@ -1,0 +1,33 @@
+From 7bb6b03a3a91a4380477a21aacc7841077a3b363 Mon Sep 17 00:00:00 2001
+From: Sohib Abdul Karim <sohib.a.karim@gmail.com>
+Date: Sat, 17 Jun 2017 04:40:54 +0700
+Subject: [PATCH] test git giggle ubuntu
+
+---
+ app/Http/Controllers/ArchiveController.php | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/app/Http/Controllers/ArchiveController.php b/app/Http/Controllers/ArchiveController.php
+index 869fce5..4595af3 100644
+--- a/app/Http/Controllers/ArchiveController.php
++++ b/app/Http/Controllers/ArchiveController.php
+@@ -27,7 +27,7 @@ class ArchiveController extends Controller
+         $archive->pause_time = date("Y-m-d H:i:s");
+         $archive->done_time = null;
+         $archive->save();
+-    	return redirect('/archive/proccess')->with('success','Proccess archiving'.$archive->url.' pause.');
++    	return redirect('/archive/proccess')->with('success','Proccess archiving '.$archive->url.' pause.');
+     }
+ 
+     public function resume($id)
+@@ -36,6 +36,6 @@ class ArchiveController extends Controller
+     	$archive->pause_time = null;
+     	$archive->resume_time = date("Y-m-d H:i:s");
+     	$archive->save();
+-    	return redirect('/archive/proccess')->with('success','Proccess archiving'.$archive->url.' resume.');
++    	return redirect('/archive/proccess')->with('success','Proccess archiving '.$archive->url.' resume.');
+     }
+ }
+-- 
+2.11.0
+

@@ -3,6 +3,14 @@
 <div class="panel panel-default">
     <div class="panel-heading"><h2>Proccess Archiving</h2></div>
     <div class="panel-body">
+        <form class="form-horizontal">
+            <div class="row col-md-4">          
+                <input placeholder="Search......" class="form-control" name="q" id='q' type="text" value="{{isset($_GET['q']) ? $_GET['q'] : ''}}" >
+            </div>
+            <div class="row col-md-4">
+                <button type="submit" class="btn  btn-primary">Search</button>
+            </div>
+        </form>
         <table id= "archive"  class="table">
             <thead>
                 <th>No</th>
@@ -15,6 +23,7 @@
             </tbody>
         </table>
         <div id='message'></div>
+        <div id='pagination' class="pull-right"></div>
     </div>
 </div>  
 @endsection
@@ -28,14 +37,21 @@
         },10);
         setInterval( function () {
             getItem();
-        }, 5000 );
+        }, 60000 );
         function getItem()
         {
-            $.getJSON("{{ URL::to('archive/list-proccess')}}", function (data) {
+            var param = {
+                'ajax':'on',
+                'q': $('#q').val(),
+                'page': "{{isset($_GET['page']) ? $_GET['page'] : ''}}"
+            };
+            let urlParameters = Object.keys(param).map((i) => i+'='+param[i]).join('&')
+            
+            $.getJSON('{{ URL::to("archive/proccess?")}}'+urlParameters, function (data) {
                 var tr;
-                var i = 0;
+                var i = {{isset($_GET['page']) ? ($_GET['page'] - 1) * 10  : 0}};
                 $('#item').html('');
-                $.each(data, function(idx, elem){
+                $.each(data.data.data, function(idx, elem){
                     i++;
                     var status;
                     var action = '';
@@ -75,6 +91,7 @@
                 if(i == 0){
                     $('#message').html('<center><b> Data Not Nound.</b></center>');
                 }
+                $('#pagination').html(data['pagination']);
             });
         }
     });

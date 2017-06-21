@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="panel panel-default">
-    <div class="panel-heading"><h2>Permission Listing</h2></div>
+    <div class="panel-heading"><h2>Role Listing</h2></div>
     <div class="panel-body">
         <a href="#" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal" onClick="dataModal('{{ URL::to('role/create')}}')">Add</a>
         <table class="table">

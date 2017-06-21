@@ -28,7 +28,6 @@ Route::get('/website/add', ['middleware' => ['permission:add-web', 'role:admin']
 // Archive
 Route::group(['prefix' => 'archive', 'middleware' => ['role:admin']], function() {
 	Route::get('/proccess', 'ArchiveController@proccess');
-	Route::get('/list-proccess', 'ArchiveController@listProccess');
 	Route::get('/read/{created_at}/{url}', 'ArchiveController@readWarc');
 	Route::get('/web/{created_at}', 'ArchiveController@web');
 	Route::get('/pause/{id}', 'ArchiveController@pause');

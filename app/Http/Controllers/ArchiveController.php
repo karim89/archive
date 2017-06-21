@@ -9,12 +9,28 @@ class ArchiveController extends Controller
 {
     public function proccess()
     {
-        return view('archive.proccess');
-    }
+        if(!isset($_GET['ajax'])) {
+            
+            return view('archive.proccess');
+        
+        } else { 
+            
+            $q = isset($_GET['q']) ? $_GET['q'] : '';
+            
+            $archive = Archive::where(function($query) use ($q){
+                    $query->where('name', 'LIKE', '%'.$q.'%');
+                    $query->orWhere('url', 'LIKE', '%'.$q.'%');
+                })->paginate(10);
 
-    public function listProccess(Request $request)
-    {
-        return Archive::get()->toJson();
+            return \Response::JSON(
+                
+                array(
+                    'data'  =>    $archive, 
+                    'pagination' => (string) $archive->appends(['q' => $q])->links()
+                )
+
+            );    
+        }
     }
 
     public function readWarc($created_at, $url)

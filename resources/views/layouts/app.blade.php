@@ -50,12 +50,12 @@
 
                             <li><a href="#"><span class="nav-icon-hexa">LU</span> Lookup </a></li>
                             @role('admin')
-                                <li >
+                                <li class="{{Request::segment(1) == 'user' || Request::segment(1) == 'role' || Request::segment(1) == 'permission' ? 'open' : ''}}">
                                     <a href="#"><span class="nav-icon-hexa">UM</span> User Manager </a>
                                     <ul>                                
-                                        <li><a href="{{ URL::to('/user')}}"><span class="nav-icon-hexa">Ul</span> User Listing </a></li> 
-                                        <li><a href="{{ URL::to('/role')}}"><span class="nav-icon-hexa">Rl</span> Role Listing </a></li> 
-                                        <li><a href="{{ URL::to('/permission')}}"><span class="nav-icon-hexa">Pl</span> Permission Listing </a></li>                 
+                                        <li><a class="{{Request::segment(1) == 'user' ? 'active' : ''}}" href="{{ URL::to('/user')}}"><span class="nav-icon-hexa">Ul</span> User Listing </a></li> 
+                                        <li><a class="{{Request::segment(1) == 'role' ? 'active' : ''}}" href="{{ URL::to('/role')}}"><span class="nav-icon-hexa">Rl</span> Role Listing </a></li> 
+                                        <li><a class="{{Request::segment(1) == 'permission' ? 'active' : ''}}" href="{{ URL::to('/permission')}}"><span class="nav-icon-hexa">Pl</span> Permission Listing </a></li>                 
                                     </ul>
                                 </li> 
                             @endrole
