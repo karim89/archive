@@ -31,8 +31,8 @@ class Kernel extends ConsoleKernel
             $archives = Archive::where('done_time', null)->get();
 
             foreach ($archives as $value) {
-                $part = '/mygwa/staging';
-                $dir = $part.'/'.date_format($value->created_at,"YmdHis");
+                $part = config('app.path_warc_staging');
+                $dir = $part.''.date_format($value->created_at,"YmdHis");
                 $file_name = str_replace(' ', '', $value->name);
                 $file_name = str_replace('.', '-', $file_name);
                 if($value->run_time == null) {

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArchiveTable extends Migration
+class CreateKeywordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateArchiveTable extends Migration
      */
     public function up()
     {
-        Schema::create('archive', function (Blueprint $table) {
+        Schema::create('keywords', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('url');
-            $table->dateTime('run_time')->nullable();
-            $table->dateTime('pause_time')->nullable();
-            $table->dateTime('resume_time')->nullable();
-            $table->dateTime('done_time')->nullable();
+            $table->text('search')->nullable();
+            $table->string('ip_address', 45)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +29,6 @@ class CreateArchiveTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('archive');
+        Schema::dropIfExists('keywords');
     }
 }

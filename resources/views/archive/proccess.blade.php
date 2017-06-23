@@ -4,11 +4,15 @@
     <div class="panel-heading"><h2>Proccess Archiving</h2></div>
     <div class="panel-body">
         <form class="form-horizontal">
-            <div class="row col-md-4">          
-                <input placeholder="Search......" class="form-control" name="q" id='q' type="text" value="{{isset($_GET['q']) ? $_GET['q'] : ''}}" >
-            </div>
-            <div class="row col-md-4">
-                <button type="submit" class="btn  btn-primary">Search</button>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name='q' id='q' class="form-control text-bold" placeholder="Keyword..." value="{{isset($_GET['q']) ? $_GET['q'] : ''}}">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default">Search</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
         <table id= "archive"  class="table">
