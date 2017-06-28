@@ -34,5 +34,15 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\RoleUser');
     }
 
+    public function avatar()
+    {
+        return $this->hasOne('App\Models\Avatar')->orderBy('id', 'desc');
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo('App\Models\Gender');
+    }
+
     
 }

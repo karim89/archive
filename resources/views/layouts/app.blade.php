@@ -79,7 +79,9 @@
                         <ul class="app-header-buttons pull-right">
                             <li>
                                 <div class="contact contact-rounded contact-bordered contact-lg contact-ps-controls">
-                                    <!-- <img src="assets/images/users/user_1.jpg" alt="John Doe"> -->
+                                    @if(Auth::user()->avatar)
+                                    <img src="{{Auth::user()->avatar->path}}" alt="{{ Auth::user()->name }}">
+                                    @endif
                                     <div class="contact-container">
                                         <a href="#">{{ Auth::user()->name }}</a>
                                         <span>
@@ -92,9 +94,9 @@
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-default btn-icon" data-toggle="dropdown"><span class="icon-cog"></span></button>                        
                                             <ul class="dropdown-menu dropdown-left">
-                                                <li><a href="#"><span class="icon-cog"></span> Settings</a></li> 
-                                                <li><a href="#"><span class="icon-envelope"></span> Messages <span class="label label-danger pull-right">+24</span></a></li>
-                                                <li><a href="#"><span class="icon-users"></span> Contacts <span class="label label-default pull-right">76</span></a></li>
+                                                <li><a href="{{ URL::to('/profile')}}"><span class="icon-user"></span> Profile</a></li> 
+                                                <li><a href="{{ URL::to('/change-password')}}"><span class="fa fa-key"></span> Change Password</a></li> 
+                                                
                                                 <li class="divider"></li>
                                                 <li>
                                                     <a href="{{ route('logout') }}"
@@ -102,7 +104,6 @@
                                                                  document.getElementById('logout-form').submit();">
                                                         Logout
                                                     </a>
-
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                         {{ csrf_field() }}
                                                     </form>
@@ -433,7 +434,12 @@
         <script type="text/javascript" src="{{ URL::to('/js/vendor/customscrollbar/jquery.mCustomScrollbar.min.js')}}"></script>
         <!-- END IMPORTANT SCRIPTS -->
         <!-- THIS PAGE SCRIPTS -->
-        <script type="text/javascript" src="{{ URL::to('/js/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.js')}}"></script>
+
+        <script type="text/javascript" src="{{ URL::to('js/vendor/bootstrap-select/bootstrap-select.js')}}"></script>
+        <script type="text/javascript" src="{{ URL::to('js/vendor/select2/select2.full.min.js')}}"></script>
+        <script type="text/javascript" src="{{ URL::to('js/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.js')}}"></script>
+        <script type="text/javascript" src="{{ URL::to('js/vendor/bootstrap-daterange/daterangepicker.js')}}"></script>
+        <script type="text/javascript" src="{{ URL::to('js/vendor/multiselect/jquery.multi-select.js')}}"></script>
         
         <script type="text/javascript" src="{{ URL::to('/js/vendor/jvectormap/jquery-jvectormap.min.js')}}"></script>
         <script type="text/javascript" src="{{ URL::to('/js/vendor/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
@@ -473,6 +479,8 @@
                      }
                 });
             }
+            $(".date").datetimepicker({format: "DD-MM-YYYY"});
+            $(".select2").select2();
         </script>
         @stack('scripts')
     </body>

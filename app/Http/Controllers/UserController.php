@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Role;
+use App\Models\Gender;
+use App\Models\Avatar;
 
 class UserController extends Controller
 {
@@ -28,11 +30,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        $role = array();
-        foreach (Role::get() as  $val) {
-            $role = $role + array($val->id => $val->display_name);
-        }
-        return view('user.form', compact('role'));
+        $role = $this->role();
+        $gender = $this->gender();
+        
+        return view('user.form', compact('role', 'gender'));
     }
 
     /**
@@ -52,6 +53,12 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
+        $user->birtdate = $request->birtdate ? date("Y-m-d", strtotime($request->birtdate)) : null;
+        $user->number = $request->number;
+        $user->researcher_number = $request->researcher_number;
+        $user->year = $request->year;
+        $user->mykad = $request->mykad;
+        $user->gender_id = $request->gender_id;
         $user->password = Hash::make($request->username.'123');
         $user->save();
         $no = 0;
@@ -81,12 +88,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $role = array();
-        foreach (Role::get() as  $val) {
-            $role = $role + array($val->id => $val->display_name);
-        }
         $user = User::find($id);
-        return view('user.form', compact('user', 'role'));
+        $role = $this->role();
+        $gender = $this->gender();
+        return view('user.form', compact('user', 'role', 'gender'));
     }
 
     /**
@@ -107,6 +112,12 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
+        $user->birtdate = $request->birtdate ? date("Y-m-d", strtotime($request->birtdate)) : null;
+        $user->number = $request->number;
+        $user->researcher_number = $request->researcher_number;
+        $user->year = $request->year;
+        $user->mykad = $request->mykad;
+        $user->gender_id = $request->gender_id;
         $user->save();
         \DB::table('role_user')->where('user_id',  $user->id)->delete();
         $no = 0;
@@ -136,7 +147,80 @@ class UserController extends Controller
         return Validator::make($data->all(), [
             'name' => 'required',
             'username' => 'required',
+            'mykad' => 'required',
+            'number' => 'required',
+            'birtdate' => 'required',
+            'gender_id' => 'required',
+            'year' => 'required',
             'email' => 'required|email'
         ]);
+    }
+
+    public function role()
+    {
+        $role = array();
+        foreach (Role::get() as  $val) {
+            $role = $role + array($val->id => $val->display_name);
+        }
+
+        return $role;    
+    }
+
+    public function gender()
+    {
+        $gender = array('' => 'Please choose');
+        foreach (Gender::get() as  $val) {
+            $gender = $gender + array($val->id => $val->code);
+        }
+
+        return $gender;    
+    }
+
+    public function profile()
+    {
+        $user = \Auth::user();
+        $role = $this->role();
+
+        return view('user.profile', compact('user', 'role'));
+    }
+
+    public function saveAvatar(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $destinationPath = public_path().'/avatars/';
+            $filename        = time() . '_' . $file->getClientOriginalName();
+            $filename = str_replace(' ','_',$filename);
+            $uploadSuccess   = $file->move($destinationPath, $filename);
+
+            $avatar = new Avatar;
+            $avatar->path = 'avatars/'.$filename;
+            $avatar->user_id = \Auth::user()->id;
+            $avatar->save();
+
+            return redirect('/profile')->with('success','Data Seved.');
+        }
+    }
+
+    public function changePassword()
+    {
+        return view('user.change_password');
+    }
+
+    public function savePassword(Request $request)
+    {
+        $current_password = \Auth::User()->password;           
+        if(Hash::check($request->current, $current_password)) {
+            if($request->password == $request->confirmation) {
+                $user = User::find(\Auth::User()->id);
+                $user->password = Hash::make($request->password);
+                $user->save();
+                return redirect('/')->with('success','Change Password.');
+            } else {
+                return redirect('/change-password')->with('danger','Please enter correct confirmation password.');
+            }
+        } else {
+            return redirect('/change-password')->with('danger','Please enter correct current password.');
+        }  
     }
 }

@@ -24,6 +24,10 @@ Route::get('/home', 'HomeController@index');
 Route::get('/origin', 'HomeController@origin');
 Route::get('/prtsc', 'HomeController@prtsc');
 Route::get('/website/add', ['middleware' => ['permission:add-web', 'role:admin'], 'uses' => 'HomeController@websiteAdd']);
+Route::get('/profile', 'UserController@profile');
+Route::post('/save-avatar', 'UserController@saveAvatar');
+Route::get('/change-password', 'UserController@changePassword');
+Route::post('/save-password', 'UserController@savePassword');
 
 // Archive
 Route::group(['prefix' => 'archive', 'middleware' => ['role:admin']], function() {

@@ -36,7 +36,7 @@
         <div class="form-group col-md-12 ">
     		<label class="col-md-4 control-label"></label>
             <div class="col-md-8">
-                <button type="submit" name="save" class="btn btn-primary pull-right btn-sm" value="save">{{isset($permissin) ? "Update" : "Save"}}</button>
+                <button type="submit" name="save" class="btn btn-primary pull-right btn-sm" value="save">{{isset($role) ? "Update" : "Save"}}</button>
             </div>
         </div>
     </div>
