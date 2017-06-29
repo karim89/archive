@@ -102,3 +102,12 @@ Route::group(['prefix' => 'gender', 'middleware' => ['role:admin']], function() 
 	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'GenderController@update']);
 	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'GenderController@destroy']);
 });
+// Hop
+Route::group(['prefix' => 'hop', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'HopController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'HopController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'HopController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'HopController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'HopController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'HopController@destroy']);
+});

@@ -48,14 +48,23 @@
                                 </ul>
                             </li>
 
-                            <li><a href="#"><span class="nav-icon-hexa">LU</span> Lookup </a></li>
                             @role('admin')
+                                <li class="{{Request::segment(1) == 'domain' || Request::segment(1) == 'format' || Request::segment(1) == 'frequency' || Request::segment(1) == 'gender' || Request::segment(1) == 'hop' ? 'open' : ''}}">
+                                    <a href="#"><span class="nav-icon-hexa">LU</span> Lookup </a>
+                                    <ul>                                
+                                        <li><a class="{{Request::segment(1) == 'domain' ? 'active' : ''}}" href="{{ URL::to('/domain')}}"><span class="nav-icon-hexa">DL</span> Domain Listing </a></li> 
+                                        <li><a class="{{Request::segment(1) == 'format' ? 'active' : ''}}" href="{{ URL::to('/format')}}"><span class="nav-icon-hexa">FM</span> Format Listing </a></li> 
+                                        <li><a class="{{Request::segment(1) == 'frequency' ? 'active' : ''}}" href="{{ URL::to('/frequency')}}"><span class="nav-icon-hexa">FQ</span> Frequency Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'gender' ? 'active' : ''}}" href="{{ URL::to('/gender')}}"><span class="nav-icon-hexa">GL</span> Gender Listing </a></li>                
+                                        <li><a class="{{Request::segment(1) == 'hop' ? 'active' : ''}}" href="{{ URL::to('/hop')}}"><span class="nav-icon-hexa">HL</span> Hop Listing </a></li>                 
+                                    </ul>
+                                </li>
                                 <li class="{{Request::segment(1) == 'user' || Request::segment(1) == 'role' || Request::segment(1) == 'permission' ? 'open' : ''}}">
                                     <a href="#"><span class="nav-icon-hexa">UM</span> User Manager </a>
                                     <ul>                                
-                                        <li><a class="{{Request::segment(1) == 'user' ? 'active' : ''}}" href="{{ URL::to('/user')}}"><span class="nav-icon-hexa">Ul</span> User Listing </a></li> 
-                                        <li><a class="{{Request::segment(1) == 'role' ? 'active' : ''}}" href="{{ URL::to('/role')}}"><span class="nav-icon-hexa">Rl</span> Role Listing </a></li> 
-                                        <li><a class="{{Request::segment(1) == 'permission' ? 'active' : ''}}" href="{{ URL::to('/permission')}}"><span class="nav-icon-hexa">Pl</span> Permission Listing </a></li>                 
+                                        <li><a class="{{Request::segment(1) == 'user' ? 'active' : ''}}" href="{{ URL::to('/user')}}"><span class="nav-icon-hexa">UL</span> User Listing </a></li> 
+                                        <li><a class="{{Request::segment(1) == 'role' ? 'active' : ''}}" href="{{ URL::to('/role')}}"><span class="nav-icon-hexa">RL</span> Role Listing </a></li> 
+                                        <li><a class="{{Request::segment(1) == 'permission' ? 'active' : ''}}" href="{{ URL::to('/permission')}}"><span class="nav-icon-hexa">PL</span> Permission Listing </a></li>                 
                                     </ul>
                                 </li> 
                             @endrole
