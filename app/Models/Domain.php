@@ -7,7 +7,7 @@ class Domain extends Model {
 
 	use SoftDeletes;
 
-	protected $table = "Domains";
+	protected $table = "domains";
 	protected $guarded = ['id'];
 	protected $dates = ['deleted_at'];
 

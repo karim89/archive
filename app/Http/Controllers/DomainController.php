@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Permission;
+use App\Models\Domain;
 
-class PermissionController extends Controller
+class DomainController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,7 +17,6 @@ class PermissionController extends Controller
     {
         $this->middleware('auth');
     }
-    
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +24,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permission = Permission::paginate(20);
-        return view('permission.index', compact('permission'));
+        $domain = Domain::paginate(20);
+        return view('domain.index', compact('domain'));
     }
 
     /**
@@ -36,7 +35,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('permission.form');
+        return view('domain.form');
     }
 
     /**
@@ -49,15 +48,17 @@ class PermissionController extends Controller
     {
         $validator = $this->validation($request);
         if ($validator->fails()):
-            // $this->throwValidationException($request, $validator);
-            return redirect('/permission')->with('danger','Data failed to save.');
+            return redirect('/domain')->with('danger','Data failed to save.');
         endif;
-        $permission = new Permission;
-        $permission->name = $request->name;
-        $permission->display_name = $request->display_name;
-        $permission->description = $request->description;
-        $permission->save();
-        return redirect('/permission')->with('success','Data Seved.');
+        $domain = new Domain;
+        $domain->code = $request->code;
+        $domain->title_bm = $request->title_bm;
+        $domain->title_eng = $request->title_eng;
+        $domain->description_bm = $request->description_bm;
+        $domain->description_eng = $request->description_eng;
+        $domain->user_id = \Auth::user()->id;
+        $domain->save();
+        return redirect('/domain')->with('success','Data Seved.');
     }
 
     /**
@@ -79,8 +80,8 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        $permission = Permission::find($id);
-        return view('permission.form', compact('permission'));
+        $domain = Domain::find($id);
+        return view('domain.form', compact('domain'));
     }
 
     /**
@@ -94,15 +95,17 @@ class PermissionController extends Controller
     {
         $validator = $this->validation($request);
         if ($validator->fails()):
-            // $this->throwValidationException($request, $validator);
-            return redirect('/permission')->with('danger','Data failed to save.');
+            return redirect('/domain')->with('danger','Data failed to save.');
         endif;
-        $permission = Permission::find($id);
-        $permission->name = $request->name;
-        $permission->display_name = $request->display_name;
-        $permission->description = $request->description;
-        $permission->save();
-        return redirect('/permission')->with('success','Data Seved.');
+        $domain = Domain::find($id);
+        $domain->code = $request->code;
+        $domain->title_bm = $request->title_bm;
+        $domain->title_eng = $request->title_eng;
+        $domain->description_bm = $request->description_bm;
+        $domain->description_eng = $request->description_eng;
+        $domain->user_id = \Auth::user()->id;
+        $domain->save();
+        return redirect('/domain')->with('success','Data Seved.');
     }
 
     /**
@@ -113,16 +116,17 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        $permission = Permission::find($id);
-        $permission->delete();
-        return redirect('/permission')->with('success','Data Deleted.');
+        $domain = Domain::find($id);
+        $domain->delete();
+        return redirect('/domain')->with('success','Data Deleted.');
     }
 
     public function validation($data)
     {
         return Validator::make($data->all(), [
-            'name' => 'required',
-            'display_name' => 'required'
+            'code' => 'required',
+            'title_bm' => 'required',
+            'title_eng' => 'required'
         ]);
     }
 }

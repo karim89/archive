@@ -57,7 +57,7 @@ Route::group(['prefix' => 'role', 'middleware' => ['role:admin']], function() {
 	Route::post('/update/{id}', ['middleware' => ['permission:user-manager'], 'uses' => 'RoleController@update']);
 	Route::get('/destroy/{id}', ['middleware' => ['permission:user-manager'], 'uses' => 'RoleController@destroy']);
 });
-// Role
+// User
 Route::group(['prefix' => 'user', 'middleware' => ['role:admin']], function() {
 	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'UserController@index']);
 	Route::get('/create', ['middleware' => ['permission:user-manager'], 'uses' => 'UserController@create']);
@@ -65,4 +65,13 @@ Route::group(['prefix' => 'user', 'middleware' => ['role:admin']], function() {
 	Route::get('/edit/{id}', ['middleware' => ['permission:user-manager'], 'uses' => 'UserController@edit']);
 	Route::post('/update/{id}', ['middleware' => ['permission:user-manager'], 'uses' => 'UserController@update']);
 	Route::get('/destroy/{id}', ['middleware' => ['permission:user-manager'], 'uses' => 'UserController@destroy']);
+});
+// Domain
+Route::group(['prefix' => 'domain', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'DomainController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'DomainController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'DomainController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'DomainController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'DomainController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'DomainController@destroy']);
 });
