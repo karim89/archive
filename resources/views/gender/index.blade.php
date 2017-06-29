@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="panel panel-default">
-    <div class="panel-heading"><h2>Domain Listing</h2></div>
+    <div class="panel-heading"><h2>Gender Listing</h2></div>
     <div class="panel-body">
-        <a href="#" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal" onClick="dataModal('{{ URL::to('domain/create')}}')">Add</a>
+        <a href="#" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal" onClick="dataModal('{{ URL::to('gender/create')}}')">Add</a>
         <table class="table">
             <tr>
                 <th width="5%">No</th>
@@ -15,7 +15,7 @@
                 <th width="14%">Action</th>
             </tr>
             <?php $no =1; ?>
-            @forelse($domain as $val)
+            @forelse($gender as $val)
                 <tr>
                     <td>{{$no++}}</td>
                     <td>{{$val->code}}</td>
@@ -24,14 +24,16 @@
                     <td>{{$val->description_bm}}</td>
                     <td>{{$val->description_eng}}</td>
                     <td>
-                        <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-xs "  onClick="dataModal('{{ URL::to('domain/edit')}}/{{$val->id}}')" >Edit</a>
-                        <a href="{{ URL::to('domain/destroy/'.$val->id)}}" class="btn btn-danger btn-xs pull-right" onclick= "return confirm('Are you sure ?')">Delete</a>
+                        <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-xs "  onClick="dataModal('{{ URL::to('gender/edit')}}/{{$val->id}}')" >Edit</a>
+                        @if(count($val->users) == 0)
+                            <a href="{{ URL::to('gender/destroy/'.$val->id)}}" class="btn btn-danger btn-xs pull-right" onclick= "return confirm('Are you sure ?')">Delete</a>
+                        @endif
                     </td>
                 </tr>    
             @empty
             @endforelse
         </table>
-        <div class="pages">{!! str_replace('/?', '?', $domain->render()) !!}</div>
+        <div class="pages">{!! str_replace('/?', '?', $gender->render()) !!}</div>
     </div>
 </div>
 

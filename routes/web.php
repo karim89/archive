@@ -75,3 +75,30 @@ Route::group(['prefix' => 'domain', 'middleware' => ['role:admin']], function() 
 	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'DomainController@update']);
 	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'DomainController@destroy']);
 });
+// Format
+Route::group(['prefix' => 'format', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'FormatController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FormatController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FormatController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FormatController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FormatController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FormatController@destroy']);
+});
+// Frequency
+Route::group(['prefix' => 'frequency', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'FrequencyController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FrequencyController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FrequencyController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FrequencyController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FrequencyController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'FrequencyController@destroy']);
+});
+// Gender
+Route::group(['prefix' => 'gender', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'GenderController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'GenderController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'GenderController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'GenderController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'GenderController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'GenderController@destroy']);
+});
