@@ -15,6 +15,8 @@ class CreateSourcesTable extends Migration
     {
         Schema::create('sources', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('logo_id')->unsigned()->nullable();           
+            $table->foreign('logo_id')->references('id')->on('logos');
             $table->text('title_bm')->nullable();
             $table->text('title_eng')->nullable();
             $table->longText('description_bm')->nullable();
