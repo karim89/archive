@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Logo;
+use App\Models\Thumbnail;
 
-class LogoController extends Controller
+class ThumbnailController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,8 +24,8 @@ class LogoController extends Controller
      */
     public function index()
     {
-        $logo = Logo::paginate(20);
-        return view('logo.index', compact('logo'));
+        $thumbnail = Thumbnail::paginate(20);
+        return view('thumbnail.index', compact('thumbnail'));
     }
 
     /**
@@ -35,7 +35,7 @@ class LogoController extends Controller
      */
     public function create()
     {
-        return view('logo.form');
+        return view('thumbnail.form');
     }
 
     /**
@@ -48,26 +48,26 @@ class LogoController extends Controller
     {
         $validator = $this->validation($request);
         if ($validator->fails()):
-            return redirect('/logo')->with('danger','Data failed to save.');
+            return redirect('/thumbnail')->with('danger','Data failed to save.');
         endif;
-        $logo = new Logo;
-        $logo->code = $request->code;
-        $logo->title_bm = $request->title_bm;
-        $logo->title_eng = $request->title_eng;
-        $logo->description_bm = $request->description_bm;
-        $logo->description_eng = $request->description_eng;
+        $thumbnail = new Thumbnail;
+        $thumbnail->code = $request->code;
+        $thumbnail->title_bm = $request->title_bm;
+        $thumbnail->title_eng = $request->title_eng;
+        $thumbnail->description_bm = $request->description_bm;
+        $thumbnail->description_eng = $request->description_eng;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $destinationPath = public_path().'/logos/';
+            $destinationPath = public_path().'/thumbnails/';
             $filename        = time() . '_' . $file->getClientOriginalName();
             $filename = str_replace(' ','_',$filename);
             $uploadSuccess   = $file->move($destinationPath, $filename);
 
-            $logo->path = 'logos/'.$filename;
+            $thumbnail->path = 'thumbnails/'.$filename;
         }
-        $logo->user_id = \Auth::user()->id;
-        $logo->save();
-        return redirect('/logo')->with('success','Data Seved.');
+        $thumbnail->user_id = \Auth::user()->id;
+        $thumbnail->save();
+        return redirect('/thumbnail')->with('success','Data Seved.');
     }
 
     /**
@@ -89,8 +89,8 @@ class LogoController extends Controller
      */
     public function edit($id)
     {
-        $logo = Logo::find($id);
-        return view('logo.form', compact('logo'));
+        $thumbnail = Thumbnail::find($id);
+        return view('thumbnail.form', compact('thumbnail'));
     }
 
     /**
@@ -104,29 +104,29 @@ class LogoController extends Controller
     {
         $validator = $this->validation($request);
         if ($validator->fails()):
-            return redirect('/logo')->with('danger','Data failed to save.');
+            return redirect('/thumbnail')->with('danger','Data failed to save.');
         endif;
-        $logo = Logo::find($id);
-        $logo->code = $request->code;
-        $logo->title_bm = $request->title_bm;
-        $logo->title_eng = $request->title_eng;
-        $logo->description_bm = $request->description_bm;
-        $logo->description_eng = $request->description_eng;
+        $thumbnail = Thumbnail::find($id);
+        $thumbnail->code = $request->code;
+        $thumbnail->title_bm = $request->title_bm;
+        $thumbnail->title_eng = $request->title_eng;
+        $thumbnail->description_bm = $request->description_bm;
+        $thumbnail->description_eng = $request->description_eng;
         if ($request->hasFile('image')) {
-            if($logo->path) {
-                unlink($logo->path);
+            if($thumbnail->path) {
+                unlink($thumbnail->path);
             }
             $file = $request->file('image');
-            $destinationPath = public_path().'/logos/';
+            $destinationPath = public_path().'/thumbnails/';
             $filename        = time() . '_' . $file->getClientOriginalName();
             $filename = str_replace(' ','_',$filename);
             $uploadSuccess   = $file->move($destinationPath, $filename);
 
-            $logo->path = 'logos/'.$filename;
+            $thumbnail->path = 'thumbnails/'.$filename;
         }
-        $logo->user_id = \Auth::user()->id;
-        $logo->save();
-        return redirect('/logo')->with('success','Data Seved.');
+        $thumbnail->user_id = \Auth::user()->id;
+        $thumbnail->save();
+        return redirect('/thumbnail')->with('success','Data Seved.');
     }
 
     /**
@@ -137,12 +137,12 @@ class LogoController extends Controller
      */
     public function destroy($id)
     {
-        $logo = Logo::find($id);
-        if($logo->path) {
-            unlink($logo->path);
+        $thumbnail = Thumbnail::find($id);
+        if($thumbnail->path) {
+            unlink($thumbnail->path);
         }
-        $logo->delete();
-        return redirect('/logo')->with('success','Data Deleted.');
+        $thumbnail->delete();
+        return redirect('/thumbnail')->with('success','Data Deleted.');
     }
 
     public function validation($data)

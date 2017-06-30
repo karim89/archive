@@ -138,3 +138,102 @@ Route::group(['prefix' => 'logo', 'middleware' => ['role:admin']], function() {
 	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LogoController@update']);
 	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LogoController@destroy']);
 });
+// Media
+Route::group(['prefix' => 'media', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'MediaController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'MediaController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'MediaController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'MediaController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'MediaController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'MediaController@destroy']);
+});
+// Proccess
+Route::group(['prefix' => 'proccess', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'ProccessController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ProccessController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ProccessController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ProccessController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ProccessController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ProccessController@destroy']);
+});
+// Record
+Route::group(['prefix' => 'record', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'RecordController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'RecordController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'RecordController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'RecordController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'RecordController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'RecordController@destroy']);
+});
+// Search
+Route::group(['prefix' => 'search', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'SearchController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SearchController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SearchController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SearchController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SearchController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SearchController@destroy']);
+});
+// Security
+Route::group(['prefix' => 'security', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'SecurityController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SecurityController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SecurityController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SecurityController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SecurityController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SecurityController@destroy']);
+});
+// Source
+Route::group(['prefix' => 'source', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'SourceController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SourceController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SourceController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SourceController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SourceController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SourceController@destroy']);
+});
+// Status
+Route::group(['prefix' => 'status', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'StatusController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'StatusController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'StatusController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'StatusController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'StatusController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'StatusController@destroy']);
+});
+// Category
+Route::group(['prefix' => 'category', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'CategoryController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'CategoryController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'CategoryController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'CategoryController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'CategoryController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'CategoryController@destroy']);
+});
+// Subcategory
+Route::group(['prefix' => 'subcategory', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'SubcategoryController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubcategoryController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubcategoryController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubcategoryController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubcategoryController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubcategoryController@destroy']);
+});
+// Subject
+Route::group(['prefix' => 'subject', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'SubjectController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubjectController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubjectController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubjectController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubjectController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'SubjectController@destroy']);
+});
+// Thumbnail
+Route::group(['prefix' => 'thumbnail', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'ThumbnailController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ThumbnailController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ThumbnailController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ThumbnailController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ThumbnailController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'ThumbnailController@destroy']);
+});

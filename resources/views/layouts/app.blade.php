@@ -49,7 +49,7 @@
                             </li>
 
                             @role('admin')
-                                <li class="{{Request::segment(1) == 'domain' || Request::segment(1) == 'format' || Request::segment(1) == 'frequency' || Request::segment(1) == 'gender' || Request::segment(1) == 'hop' || Request::segment(1) == 'language' || Request::segment(1) == 'location' || Request::segment(1) == 'logo' ? 'open' : ''}}">
+                                <li class="{{Request::segment(1) == 'domain' || Request::segment(1) == 'format' || Request::segment(1) == 'frequency' || Request::segment(1) == 'gender' || Request::segment(1) == 'hop' || Request::segment(1) == 'language' || Request::segment(1) == 'location' || Request::segment(1) == 'logo' || Request::segment(1) == 'media' || Request::segment(1) == 'proccess' || Request::segment(1) == 'record' || Request::segment(1) == 'search' || Request::segment(1) == 'security' || Request::segment(1) == 'source' || Request::segment(1) == 'status' || Request::segment(1) == 'category' || Request::segment(1) == 'subcategory' || Request::segment(1) == 'subject' || Request::segment(1) == 'thumbnail' ? 'open' : ''}}">
                                     <a href="#"><span class="nav-icon-hexa">LU</span> Lookup </a>
                                     <ul>                                
                                         <li><a class="{{Request::segment(1) == 'domain' ? 'active' : ''}}" href="{{ URL::to('/domain')}}"><span class="nav-icon-hexa">DL</span> Domain Listing </a></li> 
@@ -60,6 +60,17 @@
                                         <li><a class="{{Request::segment(1) == 'language' ? 'active' : ''}}" href="{{ URL::to('/language')}}"><span class="nav-icon-hexa">LL</span> Language Listing </a></li>
                                         <li><a class="{{Request::segment(1) == 'location' ? 'active' : ''}}" href="{{ URL::to('/location')}}"><span class="nav-icon-hexa">LC</span> Location Listing </a></li>
                                         <li><a class="{{Request::segment(1) == 'logo' ? 'active' : ''}}" href="{{ URL::to('/logo')}}"><span class="nav-icon-hexa">LG</span> Logo Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'media' ? 'active' : ''}}" href="{{ URL::to('/media')}}"><span class="nav-icon-hexa">MD</span> Media Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'proccess' ? 'active' : ''}}" href="{{ URL::to('/proccess')}}"><span class="nav-icon-hexa">PL</span> Proccess Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'record' ? 'active' : ''}}" href="{{ URL::to('/record')}}"><span class="nav-icon-hexa">RL</span> Record Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'search' ? 'active' : ''}}" href="{{ URL::to('/search')}}"><span class="nav-icon-hexa">SR</span> Search Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'security' ? 'active' : ''}}" href="{{ URL::to('/security')}}"><span class="nav-icon-hexa">SC</span> Security Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'source' ? 'active' : ''}}" href="{{ URL::to('/source')}}"><span class="nav-icon-hexa">SL</span> Source Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'status' ? 'active' : ''}}" href="{{ URL::to('/status')}}"><span class="nav-icon-hexa">ST</span> Status Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'category' ? 'active' : ''}}" href="{{ URL::to('/category')}}"><span class="nav-icon-hexa">CL</span> Category Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'subcategory' ? 'active' : ''}}" href="{{ URL::to('/subcategory')}}"><span class="nav-icon-hexa">SC</span> Subcategory Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'subject' ? 'active' : ''}}" href="{{ URL::to('/subject')}}"><span class="nav-icon-hexa">SJ</span> Subject Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'thumbnail' ? 'active' : ''}}" href="{{ URL::to('/thumbnail')}}"><span class="nav-icon-hexa">TL</span> Thumbnail Listing </a></li>
                                     </ul>
                                 </li>
                                 <li class="{{Request::segment(1) == 'user' || Request::segment(1) == 'role' || Request::segment(1) == 'permission' ? 'open' : ''}}">
