@@ -28,6 +28,12 @@ class DataSeeder extends Migration
                 'display_name' => 'User Manager',
                 'description' => 'Manage permission, Role and User',
             ],
+            [
+                'id' => 2,
+                'name' => 'lookup-manager',
+                'display_name' => 'Lookup Manager',
+                'description' => '',
+            ],
         ];
         Permission::insert($permissions);
         
@@ -61,6 +67,10 @@ class DataSeeder extends Migration
         $permission_role = [
             [
                 'permission_id' => 1,
+                'role_id' => 1, 
+            ],
+            [
+                'permission_id' => 2,
                 'role_id' => 1, 
             ],
         ];

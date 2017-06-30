@@ -111,3 +111,30 @@ Route::group(['prefix' => 'hop', 'middleware' => ['role:admin']], function() {
 	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'HopController@update']);
 	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'HopController@destroy']);
 });
+// Language
+Route::group(['prefix' => 'language', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'LanguageController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LanguageController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LanguageController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LanguageController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LanguageController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LanguageController@destroy']);
+});
+// Location
+Route::group(['prefix' => 'location', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'LocationController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LocationController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LocationController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LocationController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LocationController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LocationController@destroy']);
+});
+// Logo
+Route::group(['prefix' => 'logo', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'LogoController@index']);
+	Route::get('/create', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LogoController@create']);
+	Route::post('/store', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LogoController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LogoController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LogoController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:lookup-manager'], 'uses' => 'LogoController@destroy']);
+});

@@ -49,14 +49,17 @@
                             </li>
 
                             @role('admin')
-                                <li class="{{Request::segment(1) == 'domain' || Request::segment(1) == 'format' || Request::segment(1) == 'frequency' || Request::segment(1) == 'gender' || Request::segment(1) == 'hop' ? 'open' : ''}}">
+                                <li class="{{Request::segment(1) == 'domain' || Request::segment(1) == 'format' || Request::segment(1) == 'frequency' || Request::segment(1) == 'gender' || Request::segment(1) == 'hop' || Request::segment(1) == 'language' || Request::segment(1) == 'location' || Request::segment(1) == 'logo' ? 'open' : ''}}">
                                     <a href="#"><span class="nav-icon-hexa">LU</span> Lookup </a>
                                     <ul>                                
                                         <li><a class="{{Request::segment(1) == 'domain' ? 'active' : ''}}" href="{{ URL::to('/domain')}}"><span class="nav-icon-hexa">DL</span> Domain Listing </a></li> 
                                         <li><a class="{{Request::segment(1) == 'format' ? 'active' : ''}}" href="{{ URL::to('/format')}}"><span class="nav-icon-hexa">FM</span> Format Listing </a></li> 
                                         <li><a class="{{Request::segment(1) == 'frequency' ? 'active' : ''}}" href="{{ URL::to('/frequency')}}"><span class="nav-icon-hexa">FQ</span> Frequency Listing </a></li>
                                         <li><a class="{{Request::segment(1) == 'gender' ? 'active' : ''}}" href="{{ URL::to('/gender')}}"><span class="nav-icon-hexa">GL</span> Gender Listing </a></li>                
-                                        <li><a class="{{Request::segment(1) == 'hop' ? 'active' : ''}}" href="{{ URL::to('/hop')}}"><span class="nav-icon-hexa">HL</span> Hop Listing </a></li>                 
+                                        <li><a class="{{Request::segment(1) == 'hop' ? 'active' : ''}}" href="{{ URL::to('/hop')}}"><span class="nav-icon-hexa">HL</span> Hop Listing </a></li>                         
+                                        <li><a class="{{Request::segment(1) == 'language' ? 'active' : ''}}" href="{{ URL::to('/language')}}"><span class="nav-icon-hexa">LL</span> Language Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'location' ? 'active' : ''}}" href="{{ URL::to('/location')}}"><span class="nav-icon-hexa">LC</span> Location Listing </a></li>
+                                        <li><a class="{{Request::segment(1) == 'logo' ? 'active' : ''}}" href="{{ URL::to('/logo')}}"><span class="nav-icon-hexa">LG</span> Logo Listing </a></li>
                                     </ul>
                                 </li>
                                 <li class="{{Request::segment(1) == 'user' || Request::segment(1) == 'role' || Request::segment(1) == 'permission' ? 'open' : ''}}">

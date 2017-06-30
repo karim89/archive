@@ -42,7 +42,7 @@ class CreateMetadatasTable extends Migration
             $table->mediumText('keyword_bm')->nullable();
             $table->mediumText('keyword_eng')->nullable();
             $table->string('code', 20)->nullable();
-            $table->string('path', 45)->nullable();
+            $table->text('path')->nullable();
             $table->integer('total_hit')->nullable();
             $table->integer('total_warc')->nullable();
             $table->integer('user_id')->unsigned()->nullable();           

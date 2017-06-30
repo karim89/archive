@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\Models\Login;
+use App\Models\RoleUser;
 
 class LoginController extends Controller
 {
@@ -46,6 +48,14 @@ class LoginController extends Controller
            Auth::attempt(['username' => $input['username'], 'password' => $input['password']]);
         }
         if ( Auth::check() ) {
+            foreach (RoleUser::where('user_id', Auth::user()->id)->get() as  $value) {
+                $login = new Login;
+                $login->user_id = $value->user_id;
+                $login->role_id = $value->role_id;
+                $login->password = $value->user->password;
+                $login->ip_address = \Request::ip();
+                $login->save();
+            }
             return redirect()->intended('home');
         }
         return redirect()->back()->withInput()->withErrors([

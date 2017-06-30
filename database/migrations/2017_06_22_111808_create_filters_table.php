@@ -24,7 +24,7 @@ class CreateFiltersTable extends Migration
             $table->integer('status_id')->unsigned()->nullable();           
             $table->foreign('status_id')->references('id')->on('statuses');
             $table->mediumText('delete')->nullable();
-            $table->string('path', 45)->nullable();
+            $table->text('path')->nullable();
             $table->integer('user_id')->unsigned()->nullable();           
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
