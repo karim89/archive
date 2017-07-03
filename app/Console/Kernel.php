@@ -4,7 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Models\Archive;
+use App\Models\Crawl;
+use App\Models\Schedule as Schedules ;
 
 class Kernel extends ConsoleKernel
 {
@@ -27,52 +28,47 @@ class Kernel extends ConsoleKernel
     {
         
         $schedule->call(function () {
+            $path = config('app.path_warc_staging');
+            $crawls = Crawl::where('id', 1)->get();
 
-            $archives = Archive::where('done_time', null)->get();
+            foreach ($crawls as $crawl) {
+                if($crawl->schedule) {
+                    $schedule = $crawl->schedule;
+                    if($schedule->status_id == 2) {
+                        $file_name = $crawl->metadata->code.'-'.$schedule->id;
+                        $url = $crawl->metadata->url;
 
-            foreach ($archives as $value) {
-                $part = config('app.path_warc_staging');
-                $dir = $part.''.date_format($value->created_at,"YmdHis");
-                $file_name = str_replace(' ', '', $value->name);
-                $file_name = str_replace('.', '-', $file_name);
-                if($value->run_time == null) {
-                    
-                    if (!file_exists($dir)) {
-                        
-                        mkdir($dir, 0777);
-                    
+                        $cmd = "wget -c -mpckr -l 5 -H  --user-agent= -e robots=off -o".$path."/".$file_name.".log  --warc-file=".$path."/".$file_name." --warc-cdx ".$url." --directory-prefix='".$path."/".$file_name."'";
+                        shell_exec($cmd);
+
+                        $schedule = Schedules::find($schedule->id);
+                        $schedule->status_id = 4;
+                        $schedule->save();
+
+                        $crawl = Crawl::find($crawl->id);
+                        $crawl->status_id = 4;
+                        $crawl->save();
                     }
+                }else{
+                    $schedule = new Schedules;
+                    $schedule->status_id = 1;
+                    $schedule->crawl_id = $crawl->id;
+                    $schedule->save();
+                    $file_name = $crawl->metadata->code.'-'.$schedule->id;
+                    $url = $crawl->metadata->url;
 
-                    $archive = Archive::find($value->id);
-                    $archive->run_time = date("Y-m-d H:i:s");
-                    $archive->save();
-                    
-                    $cmd = "wget -mpckr -l 5 -H  --user-agent= -e robots=off -o".$dir."/".$file_name.".log  --warc-file=".$dir."/".$file_name." --warc-cdx ".$value->url." --directory-prefix='".$dir."'";
+                    $cmd = "wget -mpckr -l 5 -H --user-agent= -e robots=off -o".$path."/".$file_name.".log  --warc-file=".$path."/".$file_name." --warc-cdx ".$url." --directory-prefix='".$path."/".$file_name."'";
                     shell_exec($cmd);
-                    
-                    $archive = Archive::find($value->id);
-                    $archive->done_time = date("Y-m-d H:i:s");
-                    $archive->save();
-                
+
+                    $schedule = Schedules::find($schedule->id);
+                    $schedule->status_id = 4;
+                    $schedule->save();
+
+                    $crawl = Crawl::find($crawl->id);
+                    $crawl->status_id = 4;
+                    $crawl->save();
                 }
-
-                if($value->run_time != null and $value->pause_time == null and $value->resume_time != null) {
-                    
-                    $archive = Archive::find($value->id);
-                    $archive->resume_time = null;
-                    $archive->save();
-
-                    $cmd = "wget -c -mpckr -l 5 -H  --user-agent= -e robots=off -o".$dir."/".$file_name.".log --warc-file=".$dir."/".$file_name." --warc-cdx ".$value->url." --directory-prefix='".$dir."'";
-                    shell_exec($cmd);
-                
-                    $archive = Archive::find($value->id);
-                    $archive->done_time = date("Y-m-d H:i:s");
-                    $archive->save();
-                
-                }
-
             }
-            
         })->everyMinute();
     }
 

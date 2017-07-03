@@ -247,7 +247,7 @@ return [
     | Path Warc
     |--------------------------------------------------------------------------
     */
-    'path_warc_staging' => '/mygwa/staging/',
-    'path_warc_published' => ' /mygwa/published/warcs/',
+    'path_warc_staging' => '/mygwa/staging',
+    'path_warc_published' => ' /mygwa/published/warcs',
 
 ];

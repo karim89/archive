@@ -37,7 +37,8 @@ class ArchiveController extends Controller
     {
         $created_at = date('Y-m-d H:i:s', strtotime($created_at));
         $archive = Archive::where('url', $url)->where('created_at', $created_at)->first();
-        $warc = 'archive/'.date_format($archive->created_at,"YmdHis").'/'.str_replace(' ', '', $archive->name).'.warc.gz';
+        // $warc = 'archive/'.date_format($archive->created_at,"YmdHis").'/'.str_replace(' ', '', $archive->name).'.warc.gz';
+        $warc = '/mygwa/staging/klikbca12.warc.gz';
                 
         $warc_reader = new \Mixnode\WarcReader($warc);
         

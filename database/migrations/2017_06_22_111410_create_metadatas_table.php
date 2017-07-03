@@ -37,6 +37,7 @@ class CreateMetadatasTable extends Migration
             $table->foreign('security_id')->references('id')->on('securities');
             $table->text('title_bm')->nullable();
             $table->text('title_eng')->nullable();
+            $table->string('url', 100)->nullable();
             $table->longText('description_bm')->nullable();
             $table->longText('description_eng')->nullable();
             $table->mediumText('keyword_bm')->nullable();
