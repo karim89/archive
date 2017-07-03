@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
             foreach ($crawls as $crawl) {
                 if($crawl->schedule) {
                     $schedule = $crawl->schedule;
-                    if($schedule->status_id == 2) {
+                    if($schedule->status_id == 1) {
                         $file_name = $crawl->metadata->code.'-'.$schedule->id;
                         $url = $crawl->metadata->url;
 
@@ -51,7 +51,7 @@ class Kernel extends ConsoleKernel
                     }
                 }else{
                     $schedule = new Schedules;
-                    $schedule->status_id = 1;
+                    $schedule->status_id = 2;
                     $schedule->crawl_id = $crawl->id;
                     $schedule->save();
                     $file_name = $crawl->metadata->code.'-'.$schedule->id;
