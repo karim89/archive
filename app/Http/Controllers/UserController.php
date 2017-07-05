@@ -198,13 +198,13 @@ class UserController extends Controller
     {
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $destinationPath = public_path().'/avatars/';
+            $destinationPath = public_path().'/img/avatar/';
             $filename        = time() . '_' . $file->getClientOriginalName();
             $filename = str_replace(' ','_',$filename);
             $uploadSuccess   = $file->move($destinationPath, $filename);
 
             $avatar = new Avatar;
-            $avatar->path = 'avatars/'.$filename;
+            $avatar->path = 'img/avatars/'.$filename;
             $avatar->user_id = \Auth::user()->id;
             $avatar->save();
 

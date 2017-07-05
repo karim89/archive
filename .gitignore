@@ -5,6 +5,13 @@
 /public/avatars
 /public/logos
 /public/thumbnails
+/public/img/avatars
+/public/img/logos
+/public/img/thumbnails
+/public/img/avatar
+/public/img/logo
+/public/img/thumbnail
+/public/img/website
 /storage/*.key
 /vendor
 /.idea

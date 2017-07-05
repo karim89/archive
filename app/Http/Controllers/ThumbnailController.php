@@ -58,12 +58,12 @@ class ThumbnailController extends Controller
         $thumbnail->description_eng = $request->description_eng;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $destinationPath = public_path().'/thumbnails/';
+            $destinationPath = public_path().'/img/thumbnail/';
             $filename        = time() . '_' . $file->getClientOriginalName();
             $filename = str_replace(' ','_',$filename);
             $uploadSuccess   = $file->move($destinationPath, $filename);
 
-            $thumbnail->path = 'thumbnails/'.$filename;
+            $thumbnail->path = 'img/thumbnail/'.$filename;
         }
         $thumbnail->user_id = \Auth::user()->id;
         $thumbnail->save();
@@ -117,12 +117,12 @@ class ThumbnailController extends Controller
                 unlink($thumbnail->path);
             }
             $file = $request->file('image');
-            $destinationPath = public_path().'/thumbnails/';
+            $destinationPath = public_path().'/img/thumbnail/';
             $filename        = time() . '_' . $file->getClientOriginalName();
             $filename = str_replace(' ','_',$filename);
             $uploadSuccess   = $file->move($destinationPath, $filename);
 
-            $thumbnail->path = 'thumbnails/'.$filename;
+            $thumbnail->path = 'img/thumbnail/'.$filename;
         }
         $thumbnail->user_id = \Auth::user()->id;
         $thumbnail->save();

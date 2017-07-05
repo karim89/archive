@@ -40,11 +40,11 @@
                                 </ul>
                             </li>        
 
-                            <li>
+                            <li class="{{Request::segment(1) == 'website' ? 'open' : ''}}">
                                 <a href="MWARC-website-listing.html"><span class="nav-icon-hexa">WL</span> Website / URL / Domain </a>
                                 <ul>                                
-                                    <li><a href="{{ URL::to('/website/add')}}"><span class="nav-icon-hexa">Aa</span> Add Website / URL / Domain </a></li>
-                                    <li><a href="{{ URL::to('/website')}}"><span class="nav-icon-hexa">Ul</span> Website Listing </a></li>                 
+                                    <li><a class="{{Request::segment(2) == 'create' ? 'active' : ''}}" href="{{ URL::to('/website/create')}}"><span class="nav-icon-hexa">Aa</span> Add Website / URL / Domain </a></li>
+                                    <li><a class="{{Request::segment(2) != 'create' ? Request::segment(1) == 'website' ? 'active' : '' : ''}}" href="{{ URL::to('/website')}}"><span class="nav-icon-hexa">WL</span> Website Listing </a></li>                 
                                 </ul>
                             </li>
 

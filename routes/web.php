@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/origin', 'HomeController@origin');
 Route::get('/prtsc', 'HomeController@prtsc');
-Route::get('/website/add', ['middleware' => ['permission:add-web', 'role:admin'], 'uses' => 'HomeController@websiteAdd']);
+// Route::get('/website/add', ['middleware' => ['permission:website-manager', 'role:admin'], 'uses' => 'HomeController@websiteAdd']);
 Route::get('/profile', 'UserController@profile');
 Route::post('/save-avatar', 'UserController@saveAvatar');
 Route::get('/change-password', 'UserController@changePassword');
@@ -36,6 +36,28 @@ Route::group(['prefix' => 'archive', 'middleware' => ['role:admin']], function()
 	Route::get('/web/{created_at}', 'ArchiveController@web');
 	Route::get('/pause/{id}', 'ArchiveController@pause');
 	Route::get('/resume/{id}', 'ArchiveController@resume');
+	
+});
+// Website
+Route::group(['prefix' => 'website', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:website-manager'], 'uses' => 'WebsiteController@index']);
+	Route::get('/create', ['middleware' => ['permission:website-manager'], 'uses' => 'WebsiteController@create']);
+	Route::post('/store', ['middleware' => ['permission:website-manager'], 'uses' => 'WebsiteController@store']);
+	Route::get('/show/{id}', ['middleware' => ['permission:website-manager'], 'uses' => 'WebsiteController@show']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:website-manager'], 'uses' => 'WebsiteController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:website-manager'], 'uses' => 'WebsiteController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:website-manager'], 'uses' => 'WebsiteController@destroy']);
+	Route::get('/prtsc', ['middleware' => ['permission:website-manager'], 'uses' => 'WebsiteController@prtsc']);
+});
+
+// Harvet
+Route::group(['prefix' => 'harvest', 'middleware' => ['role:admin']], function() {
+	Route::get('/', ['middleware' => ['permission:user-manager'], 'uses' => 'HarvestController@index']);
+	Route::get('/create', ['middleware' => ['permission:harvest-manager'], 'uses' => 'HarvestController@create']);
+	Route::post('/store', ['middleware' => ['permission:harvest-manager'], 'uses' => 'HarvestController@store']);
+	Route::get('/edit/{id}', ['middleware' => ['permission:harvest-manager'], 'uses' => 'HarvestController@edit']);
+	Route::post('/update/{id}', ['middleware' => ['permission:harvest-manager'], 'uses' => 'HarvestController@update']);
+	Route::get('/destroy/{id}', ['middleware' => ['permission:harvest-manager'], 'uses' => 'HarvestController@destroy']);
 	
 });
 

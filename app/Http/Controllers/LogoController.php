@@ -58,12 +58,12 @@ class LogoController extends Controller
         $logo->description_eng = $request->description_eng;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $destinationPath = public_path().'/logos/';
+            $destinationPath = public_path().'/img/logo/';
             $filename        = time() . '_' . $file->getClientOriginalName();
             $filename = str_replace(' ','_',$filename);
             $uploadSuccess   = $file->move($destinationPath, $filename);
 
-            $logo->path = 'logos/'.$filename;
+            $logo->path = 'img/logo/'.$filename;
         }
         $logo->user_id = \Auth::user()->id;
         $logo->save();
@@ -117,12 +117,12 @@ class LogoController extends Controller
                 unlink($logo->path);
             }
             $file = $request->file('image');
-            $destinationPath = public_path().'/logos/';
+            $destinationPath = public_path().'/img/logo/';
             $filename        = time() . '_' . $file->getClientOriginalName();
             $filename = str_replace(' ','_',$filename);
             $uploadSuccess   = $file->move($destinationPath, $filename);
 
-            $logo->path = 'logos/'.$filename;
+            $logo->path = 'img/logo/'.$filename;
         }
         $logo->user_id = \Auth::user()->id;
         $logo->save();

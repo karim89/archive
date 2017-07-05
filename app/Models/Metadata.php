@@ -48,7 +48,7 @@ class Metadata extends Model {
 
     public function language()
     {
-        return $this->belongsTo('App\Models\language');
+        return $this->belongsTo('App\Models\Language');
     }
 
     public function location()

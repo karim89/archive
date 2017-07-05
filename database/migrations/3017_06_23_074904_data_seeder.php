@@ -34,6 +34,18 @@ class DataSeeder extends Migration
                 'display_name' => 'Lookup Manager',
                 'description' => '',
             ],
+            [
+                'id' => 3,
+                'name' => 'website-manager',
+                'display_name' => 'Website Manager',
+                'description' => '',
+            ],
+            [
+                'id' => 4,
+                'name' => 'harvest-manager',
+                'display_name' => 'Harvest Manager',
+                'description' => '',
+            ],
         ];
         Permission::insert($permissions);
         
@@ -71,6 +83,14 @@ class DataSeeder extends Migration
             ],
             [
                 'permission_id' => 2,
+                'role_id' => 1, 
+            ],
+            [
+                'permission_id' => 3,
+                'role_id' => 1, 
+            ],
+            [
+                'permission_id' => 4,
                 'role_id' => 1, 
             ],
         ];
