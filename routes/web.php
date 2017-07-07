@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,11 +24,17 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/origin', 'HomeController@origin');
 Route::get('/prtsc', 'HomeController@prtsc');
-// Route::get('/website/add', ['middleware' => ['permission:website-manager', 'role:admin'], 'uses' => 'HomeController@websiteAdd']);
+Route::get('/elfinder', 'HomeController@elfinder');
 Route::get('/profile', 'UserController@profile');
 Route::post('/save-avatar', 'UserController@saveAvatar');
 Route::get('/change-password', 'UserController@changePassword');
 Route::post('/save-password', 'UserController@savePassword');
+
+Route::group(['before' => 'auth'], function () {
+    Route::get('/laravel-filemanager', '\Unisharp\Laravelfilemanager\controllers\LfmController@show');
+    Route::post('/laravel-filemanager/upload', '\Unisharp\Laravelfilemanager\controllers\LfmController@upload');
+    // list all lfm routes here...
+});
 
 // Archive
 Route::group(['prefix' => 'archive', 'middleware' => ['role:admin']], function() {

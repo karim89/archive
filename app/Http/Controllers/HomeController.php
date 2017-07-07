@@ -32,9 +32,9 @@ class HomeController extends Controller
         return view('origin');
     }
 
-    public function websiteAdd()
+    public function elfinder()
     {
-        return view('website-add');
+        return view('elfinder');
     }
 
     public function prtsc()

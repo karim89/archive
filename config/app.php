@@ -187,6 +187,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Spatie\Browsershot\BrowsershotServiceProvider::class,
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -239,6 +241,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
@@ -247,6 +250,7 @@ return [
     | Path Warc
     |--------------------------------------------------------------------------
     */
+    'path_warc' => '/mygwa',
     'path_warc_staging' => '/mygwa/staging',
     'path_warc_published' => ' /mygwa/published/warcs',
 

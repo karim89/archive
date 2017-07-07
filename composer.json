@@ -10,7 +10,8 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
         "mixnode/mixnode-warcreader-php": "^0.0.6",
-        "spatie/browsershot": "^1.9"
+        "spatie/browsershot": "^1.9",
+        "unisharp/laravel-filemanager": "^1.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
